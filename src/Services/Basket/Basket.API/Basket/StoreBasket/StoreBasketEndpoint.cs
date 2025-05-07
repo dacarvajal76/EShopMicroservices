@@ -13,7 +13,7 @@ namespace Basket.API.Basket.StoreBasket
             {
                 var command = request.Adapt<StoreBasketCommand>();
 
-                var result = sender.Send(command);
+                var result = await sender.Send(command);
 
                 var response = request.Adapt<StoreBasketResponse>();
 
