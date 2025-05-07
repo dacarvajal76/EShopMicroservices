@@ -24,7 +24,6 @@ namespace Basket.API.Basket.StoreBasket
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Store Basket")
             .WithDescription("Store Basket");
-            throw new NotImplementedException();
         }
     }
 }
