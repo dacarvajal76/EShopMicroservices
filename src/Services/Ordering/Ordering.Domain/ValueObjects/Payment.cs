@@ -7,11 +7,11 @@ namespace Ordering.Domain.ValueObjects
         public string CardNumber { get; } = default!;
         public string Expiration { get; } = default!;
         public string Cvv { get; } = default!;
-        public string PaymentMethod { get; } = default!;
+        public int PaymentMethod { get; } = default!;
 
         protected Payment() { }
 
-        private Payment(string cardName, string cardNumber, string expiration, string cvv, string paymentMethod)
+        private Payment(string cardName, string cardNumber, string expiration, string cvv, int paymentMethod)
         {
             CardName = cardName;
             CardNumber = cardNumber;
@@ -20,7 +20,7 @@ namespace Ordering.Domain.ValueObjects
             PaymentMethod = paymentMethod;
         }
 
-        public static Payment Of(string cardName, string cardNumber, string expiration, string cvv, string paymentMethod)
+        public static Payment Of(string cardName, string cardNumber, string expiration, string cvv, int paymentMethod)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(cardName);
             ArgumentException.ThrowIfNullOrWhiteSpace(cardNumber);

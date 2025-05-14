@@ -1,6 +1,9 @@
 ﻿
+
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 namespace Ordering.Infrastructure
 {
@@ -12,6 +15,17 @@ namespace Ordering.Infrastructure
             // For example, if you have a DbContext or other services, register them here
 
             var connectionString = configuration.GetConnectionString("Database");
+
+            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+
+            services.AddDbContext<ApplicationDbContext>((sp, options) =>
+            {
+                options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+                options.UseSqlServer(connectionString);
+            });    
+
+
             return services;
         }
     }
